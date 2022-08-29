@@ -2,9 +2,9 @@
 
 ## Table of contents
 
-1. [Introduction DDoS Attacks and Attack Types](#introduction)
-1.1 [Infrastructure Layer Attacks](#infralayers)
-1.2 [Application Layer Attacks](#applayers)
+1. [Introduction DDoS Attacks and Attack Types](#introduction) 
+- 1.1 [Infrastructure Layer Attacks](#infralayers)
+- 1.2 [Application Layer Attacks](#applayers)
 2. [Azure Best Practices for DDoS and Reference Architecture with Best Practices](#bestpractices)
 3. [Monitoring](#monitoring)
 
