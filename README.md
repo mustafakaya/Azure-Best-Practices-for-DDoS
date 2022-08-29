@@ -6,7 +6,7 @@
 1.1 [Infrastructure Layer Attacks] (#infralayers)
 1.2 [Application Layer Attacks] (#applayers)
 2. [Azure Best Practices for DDoS and Reference Architecture with Best Practices](#bestpractices)
-3. [Monitoring] (#name="monitoring)
+3. [Monitoring] (#monitoring)
 
 DDoS (Distributed Denial of Service (DDoS)) attacks is one of the most common cyberattacks and protect your business from this attack is very important.  Using right Azure services helps you to protect your workloads with high availability and resiliency.  I'll use Well-Architected Framework best practices to build protect architecture in cloud. That practices help you design best architecture in cloud while avoid unnecessary cost. 
 
