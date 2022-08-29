@@ -92,11 +92,11 @@ VMSS and App Service plan offers multiple instances help us design for scalabili
 	
  <strong> G- Azure DDoS Protection Standard </strong> :  Last but most important part of DDoS protection service is Azure DDoS protection.  Azure has built-in DDoS Basic for all resource but also you can provision Azure DDoS Protection Standard your protected resource.  Azure DDoS Protection Standard, combined with application design best practices, provides enhanced DDoS mitigation features to defend against DDoS attacks. It's automatically tuned to help protect your specific Azure resources in a virtual network. Protection is simple to enable on any new or existing virtual network, and it requires no application or resource changes. 
 	
-Benefits:
-○ Always-on traffic monitoring:  Your application traffic patterns are monitored 24 hours a day, 7 days a week, looking for indicators of DDoS attacks. DDoS Protection Standard instantly and automatically mitigates the attack, once it's detected.
-○ Adaptive real time tuning: Intelligent traffic profiling learns your application's traffic over time, and selects and updates the profile that is the most suitable for your service. The profile adjusts as traffic changes over time.
-○ DDoS Protection telemetry, monitoring, and alerting: DDoS Protection Standard applies three auto-tuned mitigation policies (TCP SYN, TCP, and UDP) for each public IP of the protected resource, in the virtual network that has DDoS enabled. The policy thresholds are auto-configured via machine learning-based network traffic profiling. DDoS mitigation occurs for an IP address under attack only when the policy threshold is exceeded.
-○ Azure DDoS Rapid Response: During an active attack, Azure DDoS Protection Standard customers have access to the DDoS Rapid Response (DRR) team, who can help with attack investigation during an attack and post-attack analysis. 
+<strong>Benefits</strong>:
+- Always-on traffic monitoring:  Your application traffic patterns are monitored 24 hours a day, 7 days a week, looking for indicators of DDoS attacks. DDoS Protection Standard instantly and automatically mitigates the attack, once it's detected.
+- Adaptive real time tuning: Intelligent traffic profiling learns your application's traffic over time, and selects and updates the profile that is the most suitable for your service. The profile adjusts as traffic changes over time.
+- DDoS Protection telemetry, monitoring, and alerting: DDoS Protection Standard applies three auto-tuned mitigation policies (TCP SYN, TCP, and UDP) for each public IP of the protected resource, in the virtual network that has DDoS enabled. The policy thresholds are auto-configured via machine learning-based network traffic profiling. DDoS mitigation occurs for an IP address under attack only when the policy threshold is exceeded.
+- Azure DDoS Rapid Response: During an active attack, Azure DDoS Protection Standard customers have access to the DDoS Rapid Response (DRR) team, who can help with attack investigation during an attack and post-attack analysis. 
 		
 The following table shows features and corresponding SKUs.: 
 ![image](https://user-images.githubusercontent.com/9195953/187226366-cd541ce0-5d13-458c-a971-9d200ce5fc78.png)
