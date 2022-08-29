@@ -1,27 +1,35 @@
 # Azure Best Practices for DDoS and Reference Architecture
 
+## Table of contents
+
+1. [Introduction DDoS Attacks and Attack Types](#introduction)
+1.1 [Infrastructure Layer Attacks] (#infralayers)
+1.2 [Application Layer Attacks] (#applayers)
+2. [Azure Best Practices for DDoS and Reference Architecture with Best Practices](#bestpractices)
+3. [Monitoring] (#name="monitoring)
+
 DDoS (Distributed Denial of Service (DDoS)) attacks is one of the most common cyberattacks and protect your business from this attack is very important.  Using right Azure services helps you to protect your workloads with high availability and resiliency.  I'll use Well-Architected Framework best practices to build protect architecture in cloud. That practices help you design best architecture in cloud while avoid unnecessary cost. 
 
 In this article, I'll share best practices about DDoS protection your workload in Azure. First, I'll explain and do a quick introduction about DDoS attack types and then explain protection suggestions with right Azure products. 
 
 
-##	1. Introduction DDoS Attacks and Attack Types
+##	1. Introduction DDoS Attacks and Attack Types <a name="introduction"></a>
 
 DDoS attacks aim to make your workload unavailable to your customers by flooding the traffic from many different sources. The below diagram from Wikipedia shows how multiple computers are attacking a single computer. 
 
 
-There're a lot of different attack techniques you can find all list in there. https://en.wikipedia.org/wiki/Denial-of-service_attack#Attack_techniques
+There're a lot of different attack techniques you can find all list in there: https://en.wikipedia.org/wiki/Denial-of-service_attack#Attack_techniques
 
 Afterward, I'll consolidate attack types as Infrastructure layer attacks ( Layer 3 and Layer4 ) and Application layer attacks (Layer 7). 
 
 ![image](https://user-images.githubusercontent.com/9195953/187224993-3f5aa8f9-8cbe-4565-9986-2d087c8518c1.png)
 
 
-### 1.1 Infrastructure Layer Attacks
+### 1.1 Infrastructure Layer Attacks <a name="infralayers"></a>
 
 Infra layer attacks are most common of DDoS attacks. Attacker sends large volume of traffic to eliminate target's infra such as network, servers, firewalls, load balancer etc.  Infra layer attacks can be mitigate with scalable networks and systems. Important one is your network must scale up more rapidly than the incoming traffic flood. 
 
-Well-known types of layer 3-4 DDoS attacks (ref: https://www.cloudflare.com/ ,https://www.netscout.com/ ):
+Well-known types of layer 3-4 DDoS attacks:
 
 - <strong> Reflection Amplification Attacks </strong>: A reflection attack involves an attacker spoofing a target’s IP address and sending a request for information, primarily using the User Datagram Protocol (UDP) or in some cases, the Transmission Control Protocol (TCP). The server then responds to the request, sending an answer to the target’s IP address. Amplification attacks generate a high volume of packets that are used to overwhelm the target website without alerting the intermediary.
 - <strong> DNS amplification attacks </strong>: This DDoS attack is a reflection-based volumetric distributed denial-of-service (DDoS) attack in which an attacker leverages the functionality of open DNS resolvers in order to overwhelm a target server or network with an amplified amount of traffic, rendering the server and its surrounding infrastructure inaccessible.
@@ -30,7 +38,7 @@ Well-known types of layer 3-4 DDoS attacks (ref: https://www.cloudflare.com/ ,ht
 - <strong> Ping of death </strong>: An attacker sends a ping request that is larger than the maximum allowable size to the target. Most modern networking hardware is no longer vulnerable to this attack.
 	
 	
-### 1.2 Application Layer Attacks
+### 1.2 Application Layer Attacks <a name="applayers"></a>
 	
 This attack types are designed to attack the application itself and target the top layer in the OSI model.  These Layer 7 attacks focusing on specific vulnerabilities or issues, resulting in the application not being able to deliver content to the user and also in contrast to infra layer attacks focusing the consumption of server resources in addition to network resources. 
 
@@ -44,7 +52,7 @@ Well-known types of layer 7 DDoS attacks:
 - <strong>Slowloris attacks </strong>: This attack uses partial HTTP requests to open connections between a single computer and a targeted Web server, then keeping those connections open for as long as possible, thus overwhelming and slowing down the target. 
 
 
-##	2. DDoS Azure Reference Architecture with Best Practices
+##	2. Azure Best Practices for DDoS and Reference Architecture with Best Practices <a name="bestpractices"></a>
 
 Azure provides great tools and components to protect your workload. In this section, I'll combine these products with Microsoft Well-Architected Framework suggestions with best practices. 
 
@@ -94,7 +102,7 @@ The following table shows features and corresponding SKUs.:
 ![image](https://user-images.githubusercontent.com/9195953/187226366-cd541ce0-5d13-458c-a971-9d200ce5fc78.png)
 
 
-##	3. Monitoring Suggestions
+##	3. Monitoring  <a name="monitoring"></a>
 
 ### 3.1 Enable Azure DDoS Protection Standard Logging
 
@@ -135,3 +143,9 @@ WAF log analytics are broken down into the following categories:
 - Top 10 attacking IP addresses
 - Attack messages of IP addresses
 
+References:
+
+- Azure Well-Architected Framework
+- CloudFlare https://www.cloudflare.com
+- Netscout https://www.netscout.com/
+- Wikipedia
