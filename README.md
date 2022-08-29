@@ -10,16 +10,11 @@ In this article, I'll share best practices about DDoS protection your workload i
 DDoS attacks aim to make your workload unavailable to your customers by flooding the traffic from many different sources. The below diagram from Wikipedia shows how multiple computers are attacking a single computer. 
 
 
-
-	
-
 There're a lot of different attack techniques you can find all list in there. https://en.wikipedia.org/wiki/Denial-of-service_attack#Attack_techniques
 
 Afterward, I'll consolidate attack types as Infrastructure layer attacks ( Layer 3 and Layer4 ) and Application layer attacks (Layer 7). 
 
 ![image](https://user-images.githubusercontent.com/9195953/187224993-3f5aa8f9-8cbe-4565-9986-2d087c8518c1.png)
-
-
 
 
 ### 1.1 Infrastructure Layer Attacks
@@ -56,80 +51,63 @@ Azure provides great tools and components to protect your workload. In this sect
 
 The following diagram is a reference architecture with combined products to protect against DDoS. I'll explain step by step in each component configuration.
 
+![image](https://user-images.githubusercontent.com/9195953/187226104-237f4de1-637e-42d6-816b-7990ffac3c68.png)
+
 
 <strong> A- Azure DNS </strong>:  Azure DNS solution is Microsoft's highly available DNS resolution service. Azure DNS has advanced capabilities and Microsoft Defender for DNS  provides additional layer of protection that uses Azure DNS's Azure-provided name resolution capabilities. This can detects following suspicious and anomalous activities:
 	
-		○ Data exfiltration from your Azure resources using DNS tunneling
-		○ Malware communicating with command and control servers
-		○ DNS attacks - communication with malicious DNS resolvers
-		○ Communication with domains used for malicious activities such as phishing and crypto mining
+○ Data exfiltration from your Azure resources using DNS tunneling
+○ Malware communicating with command and control servers
+○ DNS attacks - communication with malicious DNS resolvers
+○ Communication with domains used for malicious activities such as phishing and crypto mining
 	
 <strong> B-  Azure CDN </strong>: Azure CDN is Microsoft's cloud delivery network solution to reduce load times for backends and has built-in DDoS protection.  CDN profiles protects traffic impacting other locations so you can prevent your workload from large attacks. 
 	
-	DDoS protection type depends on your solution. If you're using Azure CND from  Microsoft , that's protected by Azure Basic DDoS. It is integrated into the Azure CDN from Microsoft platform by default and at no additional cost. The full scale and capacity of Azure CDN from Microsoft’s globally deployed network provides defense against common network layer attacks through always-on traffic monitoring and real-time mitigation. Basic DDoS protection also defends against the most common, frequently occurring Layer 7 DNS Query Floods and Layer 3 and 4 volumetric attacks that target CDN endpoints. This service also has a proven track record in protecting Microsoft’s enterprise and consumer services from large-scale attacks.  You can also use Azure CDN from Verizon or Akamai. In this case, you can get Verizon's or Akamai's DNS mitigation service by default and no additional cost. 
+DDoS protection type depends on your solution. If you're using Azure CND from  Microsoft , that's protected by Azure Basic DDoS. It is integrated into the Azure CDN from Microsoft platform by default and at no additional cost. The full scale and capacity of Azure CDN from Microsoft’s globally deployed network provides defense against common network layer attacks through always-on traffic monitoring and real-time mitigation. Basic DDoS protection also defends against the most common, frequently occurring Layer 7 DNS Query Floods and Layer 3 and 4 volumetric attacks that target CDN endpoints. This service also has a proven track record in protecting Microsoft’s enterprise and consumer services from large-scale attacks.  You can also use Azure CDN from Verizon or Akamai. In this case, you can get Verizon's or Akamai's DNS mitigation service by default and no additional cost. 
 	
 <strong> C- Azure Front Door (with Web Application Firewall) </strong>: Front Door is Microsoft's global entry point that uses Microsoft's global edge network. This helps secure application built-in Layer 3-4 DDoS protection, seamlessly Web Application Firewall and Azure DNS to protect your domains.  
-		○ WAF Rate Limit: The Azure Web Application Firewall (WAF) rate limit rule for Azure Front Door controls the number of requests allowed from a particular client IP address to the application during a rate limit duration.
-		○ WAF Bot Protection: Azure WAF for Front Door provides bot rules to identify good bots and protect from bad bots. 
-		○ IP Restriction: An IP address–based access control rule is a custom WAF rule that lets you control access to your web applications.
-		○ Geo-Filtering: Geo-filtering block requests from specified regions. You can use this feature during the attack.
+○ WAF Rate Limit: The Azure Web Application Firewall (WAF) rate limit rule for Azure Front Door controls the number of requests allowed from a particular client IP address to the application during a rate limit duration.
+○ WAF Bot Protection: Azure WAF for Front Door provides bot rules to identify good bots and protect from bad bots. 
+○ IP Restriction: An IP address–based access control rule is a custom WAF rule that lets you control access to your web applications.
+○ Geo-Filtering: Geo-filtering block requests from specified regions. You can use this feature during the attack.
 		
 <strong> D- Azure Application Gateway (with Web Application Firewall) </strong>:Azure Application Gateway is a web traffic load balancer that enables you to manage traffic to your web applications. Traditional load balancers operate at the transport layer (OSI layer 4 - TCP and UDP) and route traffic based on source IP address and port, to a destination IP address and port.
 	
-	Azure Web Application Firewall (WAF) on Azure Application Gateway provides centralized protection of your web applications from common exploits and vulnerabilities. Web applications are increasingly targeted by malicious attacks that exploit commonly known vulnerabilities. SQL injection and cross-site scripting are among the most common attacks.
+Azure Web Application Firewall (WAF) on Azure Application Gateway provides centralized protection of your web applications from common exploits and vulnerabilities. Web applications are increasingly targeted by malicious attacks that exploit commonly known vulnerabilities. SQL injection and cross-site scripting are among the most common attacks.
 	
 	
 <strong> E- Azure Firewall </strong>:  Azure Firewall Manager is a platform to manage and protect your network resources at scale. You can associate your virtual networks with a DDoS protection plan within Azure Firewall Manager.
 	
+<strong> F- Virtual Machine Scale Set </strong>: Azure virtual machine scale sets let you create and manage a group of load balanced VMs. The number of VM instances can automatically increase or decrease in response to demand or a defined schedule. VMSS can handle sudden traffic increases with automatically scaling. You can use load balancer to distribute traffic to Virtual Machine Scale Set. 
 	
+VMSS and App Service plan offers multiple instances help us design for scalability. 
 	
+ <strong> G- Azure DDoS Protection Standard </strong> :  Last but most important part of DDoS protection service is Azure DDoS protection.  Azure has built-in DDoS Basic for all resource but also you can provision Azure DDoS Protection Standard your protected resource.  Azure DDoS Protection Standard, combined with application design best practices, provides enhanced DDoS mitigation features to defend against DDoS attacks. It's automatically tuned to help protect your specific Azure resources in a virtual network. Protection is simple to enable on any new or existing virtual network, and it requires no application or resource changes. 
 	
-	
-	
-	<strong> F- Virtual Machine Scale Set </strong>: Azure virtual machine scale sets let you create and manage a group of load balanced VMs. The number of VM instances can automatically increase or decrease in response to demand or a defined schedule. VMSS can handle sudden traffic increases with automatically scaling. You can use load balancer to distribute traffic to Virtual Machine Scale Set. 
-	
-	VMSS and App Service plan offers multiple instances help us design for scalability. 
-	
-	 <strong> G- Azure DDoS Protection Standard </strong> :  Last but most important part of DDoS protection service is Azure DDoS protection.  Azure has built-in DDoS Basic for all resource but also you can provision Azure DDoS Protection Standard your protected resource.  Azure DDoS Protection Standard, combined with application design best practices, provides enhanced DDoS mitigation features to defend against DDoS attacks. It's automatically tuned to help protect your specific Azure resources in a virtual network. Protection is simple to enable on any new or existing virtual network, and it requires no application or resource changes. 
-	
-	
-	
-	
-	Benefits:
-		○ Always-on traffic monitoring:  Your application traffic patterns are monitored 24 hours a day, 7 days a week, looking for indicators of DDoS attacks. DDoS Protection Standard instantly and automatically mitigates the attack, once it's detected.
-		○ Adaptive real time tuning: Intelligent traffic profiling learns your application's traffic over time, and selects and updates the profile that is the most suitable for your service. The profile adjusts as traffic changes over time.
-		○ DDoS Protection telemetry, monitoring, and alerting: DDoS Protection Standard applies three auto-tuned mitigation policies (TCP SYN, TCP, and UDP) for each public IP of the protected resource, in the virtual network that has DDoS enabled. The policy thresholds are auto-configured via machine learning-based network traffic profiling. DDoS mitigation occurs for an IP address under attack only when the policy threshold is exceeded.
-		○ Azure DDoS Rapid Response: During an active attack, Azure DDoS Protection Standard customers have access to the DDoS Rapid Response (DRR) team, who can help with attack investigation during an attack and post-attack analysis. 
+Benefits:
+○ Always-on traffic monitoring:  Your application traffic patterns are monitored 24 hours a day, 7 days a week, looking for indicators of DDoS attacks. DDoS Protection Standard instantly and automatically mitigates the attack, once it's detected.
+○ Adaptive real time tuning: Intelligent traffic profiling learns your application's traffic over time, and selects and updates the profile that is the most suitable for your service. The profile adjusts as traffic changes over time.
+○ DDoS Protection telemetry, monitoring, and alerting: DDoS Protection Standard applies three auto-tuned mitigation policies (TCP SYN, TCP, and UDP) for each public IP of the protected resource, in the virtual network that has DDoS enabled. The policy thresholds are auto-configured via machine learning-based network traffic profiling. DDoS mitigation occurs for an IP address under attack only when the policy threshold is exceeded.
+○ Azure DDoS Rapid Response: During an active attack, Azure DDoS Protection Standard customers have access to the DDoS Rapid Response (DRR) team, who can help with attack investigation during an attack and post-attack analysis. 
 		
 The following table shows features and corresponding SKUs.: 
-
-Feature	DDoS Protection Basic	DDoS Protection Standard
-Active traffic monitoring & always on detection	Yes	Yes
-Automatic attack mitigation	Yes	Yes
-Availability guarantee	Not available	Yes
-Application based mitigation policies	Not available	Yes
-Metrics & alerts	Not available	Yes
-Mitigation reports	Not available	Yes
-Mitigation flow logs	Not available	Yes
-Mitigation policy customizations	Not available	Yes
-DDoS rapid response support	Not available	Yes
+![image](https://user-images.githubusercontent.com/9195953/187226366-cd541ce0-5d13-458c-a971-9d200ce5fc78.png)
 
 
+##	3. Monitoring Suggestions
 
-	3. Monitoring Suggestions
-
-3.1 Enable Azure DDoS Protection Standard Logging
+### 3.1 Enable Azure DDoS Protection Standard Logging
 
 Azure DDoS Protection standard provides detailed attack insights and visualization with DDoS Attack Analytics. Logging can be further integrated with Microsoft Sentinel,  Splunk (Azure Event Hubs), OMS Log Analytics, and Azure Storage for advanced analysis via the Azure Monitor Diagnostics interface.
 
 The following diagnostic logs are available for Azure DDoS Protection Standard:
 
-	- DDoSProtectionNotifications: Notifications will notify you anytime a public IP resource is under attack, and when attack mitigation is over.
-	- DDoSMitigationFlowLogs: Attack mitigation flow logs allow you to review the dropped traffic, forwarded traffic and other interesting datapoints during an active DDoS attack in near-real time. 
-	- DDoSMitigationReports: Attack mitigation reports uses the Netflow protocol data which is aggregated to provide detailed information about the attack on your resource. Anytime a public IP resource is under attack, the report generation will start as soon as the mitigation starts.
-	- 
+- DDoSProtectionNotifications: Notifications will notify you anytime a public IP resource is under attack, and when attack mitigation is over.
+- DDoSMitigationFlowLogs: Attack mitigation flow logs allow you to review the dropped traffic, forwarded traffic and other interesting datapoints during an active DDoS attack in near-real time. 
+- DDoSMitigationReports: Attack mitigation reports uses the Netflow protocol data which is aggregated to provide detailed information about the attack on your resource. Anytime a public IP resource is under attack, the report generation will start as soon as the mitigation starts.
 
-3.2 Azure WAF Monitoring and Logging
+
+### 3.2 Azure WAF Monitoring and Logging
 
 Azure Web Application Firewall (WAF) monitoring and logging are provided through logging and integration with Azure Monitor and Azure Monitor logs. Following metrics can be filtered for WAF V2:
 
@@ -140,20 +118,20 @@ WAF Custom Rule Matches	Count of custom rule matches	Action, Country/Region, Mod
 WAF Bot Protection Matches	Count of total bot protection rule matches that have been blocked or logged from malicious IP addresses. The IP addresses are sourced from the Microsoft Threat Intelligence feed.	Action, Country/Region, Bot Type, Mode
 
 
-3.3 Web Application Firewall and Microsoft Sentinel
+### 3.3 Web Application Firewall and Microsoft Sentinel
 
 Azure Web Application Firewall (WAF) combined with Microsoft Sentinel can provide security information event management for WAF resources. Microsoft Sentinel provides security analytics using Log Analytics, which allows you to easily break down and view your WAF data. Using Microsoft Sentinel, you can access pre-built workbooks and modify them to best fit your organization's needs. The workbook can show analytics for WAF on Azure Content Delivery Network (CDN), WAF on Azure Front Door, and WAF on Application Gateway across several subscriptions and workspaces.
 
 WAF log analytics are broken down into the following categories:
-	- All WAF actions taken
-	- Top 40 blocked request URI addresses
-	- Top 50 event triggers,
-	- Messages over time
-	- Full message details
-	- Attack events by messages
-	- Attack events over time
-	- Tracking ID filter
-	- Tracking ID messages
-	- Top 10 attacking IP addresses
-	- Attack messages of IP addresses
+- All WAF actions taken
+- Top 40 blocked request URI addresses
+- Top 50 event triggers,
+- Messages over time
+- Full message details
+- Attack events by messages
+- Attack events over time
+- Tracking ID filter
+- Tracking ID messages
+- Top 10 attacking IP addresses
+- Attack messages of IP addresses
 
