@@ -61,8 +61,7 @@ Azure provides great tools and components to protect your workload. In this sect
 
 The following diagram is a reference architecture with combined products to protect against DDoS. I'll explain step by step in each component configuration.
 
-<img src="https://user-images.githubusercontent.com/9195953/187226104-237f4de1-637e-42d6-816b-7990ffac3c68.png" width="700">
-
+<img src="https://user-images.githubusercontent.com/9195953/187361572-15b63bea-6e8d-45d4-9ea7-e5a3fe2be3b5.jpg" width="700">
 
 
 
